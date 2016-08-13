@@ -1,3 +1,9 @@
+<!DOCTYPE html>
+
+<head>
+    <link href="resources/core/css/hello.css" rel="stylesheet" />
+</head>
+
 <html>
 <body>
 <h1>Maven + Spring MVC Web Project Example</h1>
