@@ -14,51 +14,67 @@
 
     <body>
 
-        <div class="container-fluid bg-1 text-center">
-            <h1>SARANGI</h1>
-            <div class="col-lg-6 col-sm-6 col-12">
-                <h4>Input Groups</h4>
-                <div class="input-group">
-                    <label class="input-group-btn">
-                        <span class="btn btn-primary">
-                            Browse&hellip; <input type="file" style="display: none;" multiple accept=".mp3,.wav,.au,.ogg">
-                        </span>
-                    </label>
-                    <input type="text" class="form-control" readonly>
+        <div class="container-fluid bg-1 ">
+
+            <h1 class ="text-center">SARANGI</h1>
+
+            <form action="" method="POST" >
+
+                <div class="col-lg-3 col-sm-3 col-12">
                 </div>
-            </div>
+
+                <div class="col-lg-6 col-sm-6 col-12">
+                    <div class="input-group">
+                        <label class="input-group-btn">
+                            <span class="btn btn-primary">
+                                Browse&hellip; <input  type="file" name="songFile" style="display: none;" multiple accept=".mp3,.wav,.au,.ogg">
+                            </span>
+                        </label>
+                        <input type="text" class="form-control" readonly>
+                    </div>
+
+                    <input type="submit" value="submit">
+
+                </div>
+
+            </form>
+
+        </div>
 
 
-            <script>
-                                       $(function() {
 
-                                       // We can attach the `fileselect` event to all file inputs on the page
-                                       $(document).on('change', ':file', function() {
-                                       var input = $(this),
-                                       numFiles = input.get(0).files ? input.get(0).files.length : 1,
-                                       label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
-                                       input.trigger('fileselect', [numFiles, label]);
-                                       });
+        ${song.songName}
 
-                                       // We can watch for our custom `fileselect` event like this
-                                       $(document).ready( function() {
-                                       $(':file').on('fileselect', function(event, numFiles, label) {
+        <script>
+                                             $(function() {
 
-                                       var input = $(this).parents('.input-group').find(':text'),
-                                       log = numFiles > 1 ? numFiles + ' files selected' : label;
+                                             // We can attach the `fileselect` event to all file inputs on the page
+                                             $(document).on('change', ':file', function() {
+                                             var input = $(this),
+                                             numFiles = input.get(0).files ? input.get(0).files.length : 1,
+                                             label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+                                             input.trigger('fileselect', [numFiles, label]);
+                                             });
 
-                                       if( input.length ) {
-                                       input.val(log);
-                                       } else {
-                                       if( log ) alert(log);
-                                       }
+                                             // We can watch for our custom `fileselect` event like this
+                                             $(document).ready( function() {
+                                             $(':file').on('fileselect', function(event, numFiles, label) {
 
-                                       });
-                                       });
+                                             var input = $(this).parents('.input-group').find(':text'),
+                                             log = numFiles > 1 ? numFiles + ' files selected' : label;
 
-                                       });
+                                             if( input.length ) {
+                                             input.val(log);
+                                             } else {
+                                             if( log ) alert(log);
+                                             }
 
-            </script>
+                                             });
+                                             });
+
+                                             });
+
+        </script>
 
     </body>
 </html>
