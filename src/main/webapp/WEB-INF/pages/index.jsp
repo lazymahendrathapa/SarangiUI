@@ -44,6 +44,7 @@
 
 
         ${song.songName}
+        ${song.songStatus}
 
         <script>
                                              $(function() {

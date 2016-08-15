@@ -1,14 +1,35 @@
 package com.sarangiUI.model;
+import org.springframework.web.multipart.MultipartFile;
 
 public class Song{
 
-   public String songName;
+   private String songName;
+   private MultipartFile songFile;
+   private String songStatus;
+
 
    public void setSongName(String songName){
        this.songName = songName;
    }
 
+   public void setSongFile(MultipartFile songFile){
+       this.songFile = songFile;
+   }
+
+   public void setSongStatus(String songStatus){
+       this.songStatus = songStatus;
+   }
+
+
    public String getSongName(){
        return songName;
+   }
+
+   public MultipartFile getSongFile(){
+       return songFile;
+   }
+
+   public String getSongStatus(){
+       return songStatus;
    }
 }

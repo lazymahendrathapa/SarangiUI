@@ -14,6 +14,9 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletResponse;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 
 @Controller
 public class BaseController {
@@ -37,8 +40,37 @@ public class BaseController {
         MultipartFile file = request.getFile("file");
         Song song = new Song();
         song.setSongName(file.getOriginalFilename());
+        song.setSongFile(file);
 
         logger.loggingSystem(Level.INFO,song.getSongName()+" is successfully uploaded");
+
+        String rootPath = "src/main/resources";
+
+        File dir = new File(rootPath + File.separator + "tmpFiles");
+
+        if(!dir.exists())
+            dir.mkdirs();
+
+        File serverFile = new File(dir.getAbsolutePath() + File.separator + song.getSongName());
+
+        try {
+
+            byte[] bytes = file.getBytes();
+
+            BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
+
+            stream.write(bytes);
+            stream.close();
+
+            logger.loggingSystem(Level.INFO,"Sever File location = " + serverFile.getAbsolutePath());
+            song.setSongStatus("SUCCESS");
+
+        } catch (Exception e) {
+
+            logger.loggingSystem(Level.SEVERE,"Error in copying the file");
+            song.setSongStatus("FAILURE");
+        }
+
 
         ModelAndView mv = new ModelAndView();
         mv.addObject("song",song);
