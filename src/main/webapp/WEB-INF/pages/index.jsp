@@ -18,7 +18,7 @@
 
             <h1 class ="text-center">SARANGI</h1>
 
-            <form action="" method="POST" >
+            <form action="" method="POST"  enctype="multipart/form-data">
 
                 <div class="col-lg-3 col-sm-3 col-12">
                 </div>
@@ -27,10 +27,10 @@
                     <div class="input-group">
                         <label class="input-group-btn">
                             <span class="btn btn-primary">
-                                Browse&hellip; <input  type="file" name="songFile" style="display: none;" multiple accept=".mp3,.wav,.au,.ogg">
+                                Browse&hellip; <input  type="file" name="file" style="display: none;" multiple accept=".mp3,.wav,.au,.ogg">
                             </span>
                         </label>
-                        <input type="text" class="form-control" readonly>
+                        <input type="text" class="form-control" name="desc" readonly>
                     </div>
 
                     <input type="submit" value="submit">

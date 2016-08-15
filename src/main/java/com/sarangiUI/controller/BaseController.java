@@ -1,5 +1,6 @@
 package com.sarangiUI.controller;
 
+import java.util.Iterator;
 import com.sarangiUI.model.Song;
 import com.sarangiUI.logger.LoggerHandler;
 import java.util.logging.Level;
@@ -10,6 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.multipart.MultipartFile;
+import javax.servlet.http.HttpServletResponse;
 
 @Controller
 public class BaseController {
@@ -28,10 +32,11 @@ public class BaseController {
     }
 
     @RequestMapping(value = "/", method = RequestMethod.POST)
-    public ModelAndView setSong(WebRequest req) {
+    public ModelAndView setSong(MultipartHttpServletRequest request) {
 
+        MultipartFile file = request.getFile("file");
         Song song = new Song();
-        song.setSongName(req.getParameter("songFile"));
+        song.setSongName(file.getOriginalFilename());
 
         logger.loggingSystem(Level.INFO,song.getSongName()+" is successfully uploaded");
 
