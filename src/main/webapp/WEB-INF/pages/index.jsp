@@ -10,13 +10,21 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <link href="resources/core/css/bootstrap.min.css" rel="stylesheet" />
         <link href="resources/core/css/sarangi.css" rel="stylesheet" />
+          <link rel="stylesheet" type="text/css"
+                    href="https://fonts.googleapis.com/css?family=Denk One">
     </head>
 
-    <body>
+    <body style="font-family:Denk One">
 
         <div class="container-fluid bg-1 ">
 
+            <br />
+            <br/>
+            <br/>
             <h1 class ="text-center">SARANGI</h1>
+            <br/>
+            <br/>
+            <br/>
 
             <form action="" method="POST"  enctype="multipart/form-data">
 
@@ -32,8 +40,8 @@
                         </label>
                         <input type="text" class="form-control" name="desc" readonly>
                     </div>
-
-                    <input type="submit" value="submit">
+                    <br/>
+                    <input type="submit" class="btn btn-default" value="submit">
 
                 </div>
 
@@ -42,9 +50,22 @@
         </div>
 
 
+        <hr>
+ 
+        <div class="col-lg-3 col-sm-3 col-12">
+        </div>
 
-        ${song.songName}
-        ${song.songStatus}
+       <div class="col-lg-6 col-sm-6 text-center">
+        <h3>Song Name: Bebop.mp3 </h3>
+        <h4 class = "alert alert-info"> Genre : Jazz</h4>
+        <h4 class = "alert alert-warning"> Arousal: Low Arousal </h4>
+        <h4 class = "alert alert-success"> Valence: High Valence </h4>
+        <h4 class = "alert alert-danger"> ERROR </h4>
+       <!-- ${song.songStatus}
+                ${song.songName}
+                                         ${song.songResult}-->
+
+        </div>
 
         <script>
                                              $(function() {

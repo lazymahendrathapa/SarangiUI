@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.InputStream;
 
 @Controller
 public class BaseController {
@@ -63,11 +64,25 @@ public class BaseController {
             stream.close();
 
             logger.loggingSystem(Level.INFO,"Sever File location = " + serverFile.getAbsolutePath());
+
             song.setSongStatus("SUCCESS");
+
+            Process process = Runtime.getRuntime().exec("java -cp .:src/main/resources/target/* com.sarangi.app.App classify -c src/main/resources/target/classifier/genresvm.txt src/main/resources/target/classifier/arousalsvm.txt src/main/resources/target/classifier/valencesvm.txt -C SVM -f src/main/resources/tmpFiles/"+song.getSongName());
+            //Process process = Runtime.getRuntime().exec("java -cp .:src/main/resources/target/* com.sarangi.app.App test -C SVM -k src/main/resources/target/songFeatures/genrefeatures.txt -l 0");
+            process.waitFor();
+
+            InputStream in = process.getInputStream();
+            InputStream err = process.getErrorStream();
+
+            byte input[] = new byte[in.available()];
+            in.read(input,0,input.length);
+            logger.loggingSystem(Level.INFO,new String(input));
+
+            song.setSongResutl(new String(input));
 
         } catch (Exception e) {
 
-            logger.loggingSystem(Level.SEVERE,"Error in copying the file");
+            logger.loggingSystem(Level.SEVERE,"Error while processing file");
             song.setSongStatus("FAILURE");
         }
 

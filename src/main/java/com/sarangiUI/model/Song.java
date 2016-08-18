@@ -6,6 +6,7 @@ public class Song{
    private String songName;
    private MultipartFile songFile;
    private String songStatus;
+   private String songResult;
 
 
    public void setSongName(String songName){
@@ -20,6 +21,10 @@ public class Song{
        this.songStatus = songStatus;
    }
 
+   public void setSongResutl(String songResult){
+       this.songResult = songResult;
+   }
+
 
    public String getSongName(){
        return songName;
@@ -31,5 +36,9 @@ public class Song{
 
    public String getSongStatus(){
        return songStatus;
+   }
+
+   public String getSongResult(){
+       return songResult;
    }
 }
