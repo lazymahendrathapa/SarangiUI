@@ -10,8 +10,10 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <link href="resources/core/css/bootstrap.min.css" rel="stylesheet" />
         <link href="resources/core/css/sarangi.css" rel="stylesheet" />
-          <link rel="stylesheet" type="text/css"
-                    href="https://fonts.googleapis.com/css?family=Denk One">
+        <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Denk One">
+        <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+        <%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core' %>
+
     </head>
 
     <body style="font-family:Denk One">
@@ -56,14 +58,20 @@
         </div>
 
        <div class="col-lg-6 col-sm-6 text-center">
-        <h3>Song Name: Bebop.mp3 </h3>
-        <h4 class = "alert alert-info"> Genre : Jazz</h4>
-        <h4 class = "alert alert-warning"> Arousal: Low Arousal </h4>
-        <h4 class = "alert alert-success"> Valence: High Valence </h4>
-        <h4 class = "alert alert-danger"> ERROR </h4>
-       <!-- ${song.songStatus}
-                ${song.songName}
-                                         ${song.songResult}-->
+        <h3> ${song.songName}</h3>
+
+        <c:choose>
+        <c:when test="${(fn:length(song.songError) != 0) || (fn:length(song.songStatus) != 0)}">
+        <h4 class = "alert alert-danger"> Something Error</h4>
+        </c:when>
+
+        <c:when test="${fn:length(song.songGenre) != 0}">
+        <h4 class = "alert alert-info">${song.songGenre}</h4>
+        <h4 class = "alert alert-warning">${song.songArousal}</h4>
+        <h4 class = "alert alert-success">${song.songValence}</h4>
+        </c:when>
+
+        </c:choose>
 
         </div>
 

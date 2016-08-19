@@ -65,10 +65,7 @@ public class BaseController {
 
             logger.loggingSystem(Level.INFO,"Sever File location = " + serverFile.getAbsolutePath());
 
-            song.setSongStatus("SUCCESS");
-
-            Process process = Runtime.getRuntime().exec("java -cp .:src/main/resources/target/* com.sarangi.app.App classify -c src/main/resources/target/classifier/genresvm.txt src/main/resources/target/classifier/arousalsvm.txt src/main/resources/target/classifier/valencesvm.txt -C SVM -f src/main/resources/tmpFiles/"+song.getSongName());
-            //Process process = Runtime.getRuntime().exec("java -cp .:src/main/resources/target/* com.sarangi.app.App test -C SVM -k src/main/resources/target/songFeatures/genrefeatures.txt -l 0");
+            Process process = Runtime.getRuntime().exec("java -cp .:src/main/resources/target/* com.sarangi.app.App classify -c src/main/resources/classifier/genreSVM.txt src/main/resources/classifier/arousalSVM.txt src/main/resources/classifier/valenceSVM.txt -C SVM -f src/main/resources/tmpFiles/"+song.getSongName()+" -l genre arousal valence");
             process.waitFor();
 
             InputStream in = process.getInputStream();
@@ -78,7 +75,25 @@ public class BaseController {
             in.read(input,0,input.length);
             logger.loggingSystem(Level.INFO,new String(input));
 
-            song.setSongResutl(new String(input));
+            byte error[] = new byte[err.available()];
+            err.read(error,0,error.length);
+            logger.loggingSystem(Level.SEVERE,new String(error));
+
+
+            if(error.length != 0){
+                song.setSongError("Something Wrong");
+            }
+
+            else{
+
+
+                String result = new String(input);
+                String[] split = result.split("\n");
+
+                song.setSongGenre(split[1]);
+                song.setSongArousal(split[2]);
+                song.setSongValence(split[3]);
+            }
 
         } catch (Exception e) {
 
@@ -90,6 +105,15 @@ public class BaseController {
         ModelAndView mv = new ModelAndView();
         mv.addObject("song",song);
         mv.setViewName("index");
+
+        try{
+
+            Runtime.getRuntime().exec("rm " + serverFile);
+
+        }catch(Exception e){
+
+            logger.loggingSystem(Level.WARNING,"File no deleted");
+        }
 
         return mv;
 

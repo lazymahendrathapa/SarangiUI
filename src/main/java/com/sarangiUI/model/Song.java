@@ -7,7 +7,10 @@ public class Song{
    private MultipartFile songFile;
    private String songStatus;
    private String songResult;
-
+   private String songGenre;
+   private String songArousal;
+   private String songValence;
+   private String songError;
 
    public void setSongName(String songName){
        this.songName = songName;
@@ -25,7 +28,21 @@ public class Song{
        this.songResult = songResult;
    }
 
+   public void setSongGenre(String songGenre){
+       this.songGenre = songGenre;
+   }
 
+   public void setSongArousal(String songArousal){
+       this.songArousal = songArousal;
+   }
+
+   public void setSongValence(String songValence){
+       this.songValence = songValence;
+   }
+
+   public void setSongError(String songError){
+       this.songError = songError;
+   }
    public String getSongName(){
        return songName;
    }
@@ -40,5 +57,21 @@ public class Song{
 
    public String getSongResult(){
        return songResult;
+   }
+
+   public String getSongGenre(){
+       return songGenre;
+   }
+
+   public String getSongArousal(){
+       return songArousal;
+   }
+
+   public String getSongValence(){
+       return songValence;
+   }
+
+   public String getSongError(){
+       return songError;
    }
 }
